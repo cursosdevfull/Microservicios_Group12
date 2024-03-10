@@ -2,7 +2,6 @@ const express = require("express");
 const http = require("http");
 const cors = require("cors");
 const app = express();
-const axios = require("axios");
 
 app.use(cors());
 
@@ -40,10 +39,10 @@ app.get("/api/products", async (req, res) => {
     },
     { id: 1, category: "Category1", product: "Product5", price: 56, stock: 56 },
   ];
-
-  const response = await axios.get("http://localhost:3020/api/products");
-  const data = response.data;
-
+  const response = await fetch(
+    process.env.backendUrl2 || "http://localhost:3020/api/products"
+  ).then();
+  const data = await response.json().then();
   res.json(products.concat(data));
 });
 

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@auth": ["src/modules/auth/index.ts"],
+      "@bootstrap": ["src/bootstrap/index.ts"]
+    }
+  }
+}

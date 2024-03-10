@@ -10,7 +10,8 @@ app.get("/healthcheck", (req, res) => res.send("All is right"));
 
 app.get("/api/config", (req, res) => {
   res.json({
-    backend1Url: "http://localhost:3010/api/products",
+    backend1Url:
+      process.env.backendUrl1 || "http://localhost:3010/api/products",
   });
 });
 

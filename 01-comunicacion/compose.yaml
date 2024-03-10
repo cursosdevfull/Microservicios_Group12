@@ -1,0 +1,70 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: frontend1:1
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - 9000:3000
+    environment:
+      - backendUrl1=http://localhost:9010/api/products
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:3000/healthcheck"]
+      interval: 3s
+      timeout: 10s
+      retries: 5
+      start_period: 8s
+    depends_on:
+      backend1:
+        condition: service_healthy
+    networks:
+      - net-com-1
+
+  backend1:
+    image: backend1:1
+    build:
+      dockerfile: Dockerfile
+      context: ./backend1
+    container_name: backend1
+    ports:
+      - 9010:3010
+    environment:
+      - backendUrl2=http://backend2:3020/api/products
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:3010/healthcheck"]
+      interval: 3s
+      timeout: 10s
+      retries: 5
+      start_period: 8s
+    depends_on:
+      backend2:
+        condition: service_healthy
+    networks:
+      - net-com-1
+      - net-com-2
+
+  backend2:
+    image: backend2:1
+    build:
+      dockerfile: Dockerfile
+      context: ./backend2
+    container_name: backend2
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:3020/healthcheck"]
+      interval: 3s
+      timeout: 10s
+      retries: 5
+      start_period: 8s
+    networks:
+      - net-com-2
+
+networks:
+  net-com-1:
+    name: net-com-1
+    driver: bridge
+  net-com-2:
+    name: net-com-2
+    driver: bridge
