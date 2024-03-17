@@ -1,21 +1,26 @@
-import { Auth, AuthApplication, AuthInfrastructure } from "@auth";
-import {
-  BrokerBootstrap,
-  CacheBootstrap,
-  DatabaseBootstrap,
-  ServerBootstrap,
-} from "@bootstrap";
+import "reflect-metadata";
 
-const auth = new Auth("email@email.com", "password");
-const authApplication = new AuthApplication("email@email.com", "password");
-const authInfrastructure = new AuthInfrastructure(
-  "email@email.com",
-  "password"
-);
+import http from "http";
 
-const server = new ServerBootstrap();
-const database = new DatabaseBootstrap();
-const cache = new CacheBootstrap();
-const broker = new BrokerBootstrap();
+import { app } from "./app";
 
-console.log("prueba");
+const server = http.createServer(app);
+
+server.listen(3000, () => console.log("Server running on port 3000"));
+
+/* (async () => {
+  const user = new User({
+    name: "Marcela",
+    lastname: "Nieto",
+    email: "marcela@company.com",
+    password: "12345",
+    refreshToken: "339c003e-1df2-48f6-b633-36e1d3444c40",
+    positionJobs: [new PositionJob("TI", "developer frontend", 2021)],
+  }); */
+
+/*   const repository: UserRepository = new UserInfrastructure();
+  const application: UserApplication = new UserApplication(repository); */
+/*   const application: UserApplication = container.get("UserApplication");
+  const userCreated = await application.create(user);
+  console.log(userCreated); */
+//})();
