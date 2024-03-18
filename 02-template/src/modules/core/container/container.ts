@@ -8,4 +8,5 @@ const container = new Container();
 container.bind<UserRepository>("UserRepository").to(UserInfrastructure);
 container.bind<UserApplication>("UserApplication").to(UserApplication);
 container.bind<UserController>("UserController").to(UserController);
+
 export { container };

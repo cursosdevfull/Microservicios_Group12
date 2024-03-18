@@ -1,1 +1,5 @@
-export default class DatabaseBootstrap {}
+export class DatabaseBootstrap {
+  initialize(): Promise<any> {
+    //new DataSource({});
+  }
+}
