@@ -3,5 +3,11 @@
 ### Leer logs
 
 ```
-docker logs fronend
+docker logs frontend
+```
+
+### Ingresar al contenedor
+
+```
+docker exec -it <nombre contenedor> sh
 ```

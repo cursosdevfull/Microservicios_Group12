@@ -1,6 +1,7 @@
 import { Parameters } from "@core";
 import { Application } from "express";
 import http from "http";
+import { AddressInfo } from "net";
 
 export class ServerBootstrap {
   private readonly app: Application;
@@ -18,7 +19,11 @@ export class ServerBootstrap {
         server
           .listen(port)
           .on("listening", () => {
-            console.log(`Server running on port ${port}`);
+            console.log(
+              `Server running on port http://${Parameters.hostname}:${
+                (server.address() as AddressInfo).port
+              }`
+            );
             resolve(true);
           })
           .on("error", (error: NodeJS.ErrnoException) => {

@@ -1,11 +1,10 @@
 import { User, UserRepository } from "@user/domain";
-import { inject, injectable } from "inversify";
 
-@injectable()
+//@injectable()
 export class UserApplication {
   private repository: UserRepository;
 
-  constructor(@inject("UserRepository") repository: UserRepository) {
+  constructor(/*@inject("UserRepository")*/ repository: UserRepository) {
     this.repository = repository;
   }
 

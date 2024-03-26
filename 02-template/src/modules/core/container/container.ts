@@ -9,4 +9,6 @@ container.bind<UserRepository>("UserRepository").to(UserInfrastructure);
 container.bind<UserApplication>("UserApplication").to(UserApplication);
 container.bind<UserController>("UserController").to(UserController);
 
+//console.log("container initialize", container);
+
 export { container };

@@ -1,1 +1,10 @@
-post http://localhost:3000/user
+post http://localhost:4000/user
+Content-Type: application/json
+
+{
+  "name": "John",
+  "lastname": "Doe",
+  "email": "john3@company.com",
+  "positionJobs": [{"area": "IT", "position": "developer", "year": 2023}]
+}
+

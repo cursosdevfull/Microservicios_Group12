@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  mysql-server:
+    image: mysql:8
+    container_name: mysql-server
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    volumes:
+      - vol-mysql-server:/var/lib/mysql
+    networks:
+      - net-ms
+
+  mysql-client:
+    image: phpmyadmin
+    container_name: mysql-client
+    ports:
+      - "8080:80"
+    environment:
+      PMA_ARBITRARY: 1
+    restart: unless-stopped
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "localhost"]
+      interval: 50s
+      timeout: 5s
+      retries: 3
+    networks:
+      - net-ms
+
+volumes:
+  vol-mysql-server:
+    name: vol-mysql-server
+
+networks:
+  net-ms:
+    driver: bridge
+    name: net-ms

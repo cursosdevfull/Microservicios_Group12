@@ -1,6 +1,6 @@
 import "reflect-metadata";
 
-import { ServerBootstrap } from "@bootstrap";
+import { DatabaseBootstrap, ServerBootstrap } from "@bootstrap";
 import dotenv from "dotenv";
 
 import { app } from "./app";
@@ -8,10 +8,14 @@ import { app } from "./app";
 dotenv.config();
 
 (async () => {
-  try {
-    const serverBootstrap = new ServerBootstrap(app);
+  const serverBootstrap = new ServerBootstrap(app);
+  const databaseBootstrap = new DatabaseBootstrap();
 
-    const taskAsyncronous = [serverBootstrap.initialize()];
+  try {
+    const taskAsyncronous = [
+      serverBootstrap.initialize(),
+      databaseBootstrap.initialize(),
+    ];
 
     await Promise.all(taskAsyncronous);
   } catch (error) {

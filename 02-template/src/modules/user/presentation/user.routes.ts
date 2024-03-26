@@ -1,21 +1,25 @@
-import { container } from "@core";
 import { Router } from "express";
 
+import { UserApplication } from "../application/user.application";
+import { UserInfrastructure } from "../infrastructure/user.infrastructure";
 import { UserController } from "./user.controller";
 
 class UserRoutes {
   readonly router: Router;
-  private controller: UserController;
 
-  constructor() {
+  constructor(private readonly controller: UserController) {
     this.router = Router(); //express.Router();
-    this.controller = container.get("UserController");
+
     this.mountRoutes();
   }
 
   private mountRoutes() {
-    this.router.post("/", this.controller.create);
+    this.router.post("/", this.controller.create.bind(this.controller));
   }
 }
 
-export const userRouter = new UserRoutes().router;
+const repository = new UserInfrastructure();
+const application = new UserApplication(repository);
+const controller = new UserController(application);
+
+export const userRouter = new UserRoutes(controller).router;

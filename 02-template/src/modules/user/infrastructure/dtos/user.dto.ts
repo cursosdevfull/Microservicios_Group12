@@ -10,6 +10,7 @@ export class UserDto {
     }
 
     const userEntity = plainToInstance(UserEntity, model.properties);
+    console.log("UserEntity", userEntity);
     /*     const userEntity = new UserEntity();
     userEntity.userId = model.properties.userId;
     userEntity.name = model.properties.name;
