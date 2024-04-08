@@ -4,6 +4,8 @@ import http from "http";
 import { AddressInfo } from "net";
 
 export class ServerBootstrap {
+  private instanceServer: http.Server;
+
   private readonly app: Application;
 
   constructor(app: Application) {
@@ -19,6 +21,7 @@ export class ServerBootstrap {
         server
           .listen(port)
           .on("listening", () => {
+            this.instanceServer = server;
             console.log(
               `Server running on port http://${Parameters.hostname}:${
                 (server.address() as AddressInfo).port
@@ -47,5 +50,9 @@ export class ServerBootstrap {
     );
 
     return promise;
+  }
+
+  getInstanceServer(): http.Server {
+    return this.instanceServer;
   }
 }
