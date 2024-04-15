@@ -1,20 +1,26 @@
 import "reflect-metadata";
 
-import { DatabaseBootstrap, ServerBootstrap } from "@bootstrap";
+import {
+  BrokerBootstrap,
+  DatabaseBootstrap,
+  ServerBootstrap,
+} from "@bootstrap";
 import dotenv from "dotenv";
 
 import { app } from "./app";
 
-dotenv.config();
+dotenv.config({ path: "env.txt" });
 
 const serverBootstrap = new ServerBootstrap(app);
 const databaseBootstrap = new DatabaseBootstrap();
+const brokerBootstrap = new BrokerBootstrap();
 
 (async () => {
   try {
     const taskAsyncronous = [
       serverBootstrap.initialize(),
       databaseBootstrap.initialize(),
+      brokerBootstrap.initialize(),
     ];
 
     await Promise.all(taskAsyncronous);

@@ -40,4 +40,19 @@ export class Parameters {
         : 1000,
     };
   }
+
+  static get kafkaConfig() {
+    return {
+      clientId: process.env.KAFKA_CLIENT_ID || "my-client-kafka",
+      brokers: process.env.KAFKA_BROKERS.split(",") || ["localhost:9092"],
+    };
+  }
+
+  static get kafkaGroupId() {
+    return process.env.KAFKA_GROUP_ID || "test-group";
+  }
+
+  static get kafkaTopic() {
+    return process.env.KAFKA_TOPIC || "test-topic";
+  }
 }

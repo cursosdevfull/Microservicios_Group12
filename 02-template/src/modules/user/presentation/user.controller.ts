@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { IError } from "src/modules/core/interface/error.interface";
-import { CypherService } from "src/modules/core/presentation/service/cypher.service";
 
+import { IError } from "../../core/interface/error.interface";
+import { CypherService } from "../../core/presentation/service/cypher.service";
 import { UserApplication } from "../application/user.application";
 import { UserProperties } from "../domain/roots/user";
 import { UserFactory } from "../domain/roots/user.factory";

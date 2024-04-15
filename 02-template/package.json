@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon src/index.ts"
+    "clean": "rimraf dist cache",
+    "build": "npm run clean && tsc && gulp minify",
+    "start:dev": "nodemon src/index.ts",
+    "start": "node -r ./tsconfig-paths-bootstrap.js dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +20,11 @@
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
     "@types/uuid": "^9.0.8",
+    "gulp": "^4.0.2",
+    "gulp-uglify-es": "^3.0.0",
     "nodemon": "^3.1.0",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
-    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.4.2"
   },
   "dependencies": {
@@ -35,6 +40,7 @@
     "reflect-metadata": "^0.2.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
+    "tsconfig-paths": "^4.2.0",
     "typeorm": "^0.3.20",
     "uuid": "^9.0.1"
   }
