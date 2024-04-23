@@ -38,10 +38,10 @@ const shutdownBySignal = (signalName: string) => {
   };
 };
 
-process
+/* process
   .on("SIGINT", shutdownBySignal("SIGINT"))
   .on("SIGTERM", shutdownBySignal("SIGTERM"))
   .on("SIGUSR2", shutdownBySignal("SIGUSR2"))
   .on("exit", shutdownBySignal("exit"))
   .on("unhandledRejection", shutdownBySignal("unhandledRejection"))
-  .on("uncaughtException", shutdownBySignal("uncaughtException"));
+  .on("uncaughtException", shutdownBySignal("uncaughtException")); */

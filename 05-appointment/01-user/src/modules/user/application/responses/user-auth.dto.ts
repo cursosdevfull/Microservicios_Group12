@@ -6,6 +6,7 @@ export class UserAuthResponse {
   lastname: string;
   email: string;
   roles: { name: string }[];
+  refreshToken: string;
 }
 
 export class UserAuthResponseDto {
@@ -16,6 +17,7 @@ export class UserAuthResponseDto {
     response.lastname = model.lastname;
     response.email = model.email;
     response.roles = model.roles;
+    response.refreshToken = model.refreshToken;
 
     return response;
   }

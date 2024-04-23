@@ -55,6 +55,7 @@ export class UserDto {
     response.email = model.email;
     response.password = model.password;
     response.roles = model.roles.map((role) => ({ name: role.name }));
+    response.refreshToken = model.refreshToken;
 
     return response;
   }

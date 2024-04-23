@@ -27,4 +27,8 @@ export class Parameters {
   static get tokenExpiration(): string {
     return process.env.TOKEN_EXPIRATION || "1h";
   }
+
+  static get serviceUserLogin(): string {
+    return process.env.SERVICE_USER_LOGIN;
+  }
 }

@@ -5,4 +5,5 @@ export class UserLoginResponseDto {
   email: string;
   password: string;
   roles: { name: string }[];
+  refreshToken: string;
 }

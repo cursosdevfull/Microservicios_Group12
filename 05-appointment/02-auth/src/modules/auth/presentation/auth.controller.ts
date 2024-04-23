@@ -1,11 +1,15 @@
 import { NextFunction, Request, Response } from "express";
+import { inject, injectable } from "inversify";
 
 import { IError } from "../../core/interface/error.interface";
 import { AuthApplication } from "../application/auth.application";
 import { ValidationsAuthService } from "./services/validations.service";
 
+@injectable()
 export class AuthController {
-  constructor(private readonly application: AuthApplication) {}
+  constructor(
+    @inject("AuthApplication") private readonly application: AuthApplication
+  ) {}
 
   async login(req: Request, res: Response, next: NextFunction) {
     const errors = await ValidationsAuthService.login(req.body);

@@ -1,8 +1,13 @@
+import { inject, injectable } from "inversify";
+
 import { AuthRepository } from "../domain/repositories/auth.repository";
 import { TokenService } from "./services/token.service";
 
+@injectable()
 export class AuthApplication {
-  constructor(private readonly repository: AuthRepository) {}
+  constructor(
+    @inject("AuthRepository") private readonly repository: AuthRepository
+  ) {}
 
   async login(email: string, password: string): Promise<any> {
     const user = await this.repository.getUserByCredentials(email, password);

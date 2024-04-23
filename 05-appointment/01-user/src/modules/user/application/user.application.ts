@@ -1,4 +1,5 @@
 import { User, UserRepository } from "@user/domain";
+import { inject, injectable } from "inversify";
 
 import { CypherService } from "../../core/presentation/service/cypher.service";
 import {
@@ -8,11 +9,11 @@ import {
 import { UserGetOneResponseDto } from "./responses/user-get-one.dto";
 import { UserLoginResponseDto } from "./responses/user-login.dto";
 
-//@injectable()
+@injectable()
 export class UserApplication {
   private repository: UserRepository;
 
-  constructor(/*@inject("UserRepository")*/ repository: UserRepository) {
+  constructor(@inject("UserRepository") repository: UserRepository) {
     this.repository = repository;
   }
 

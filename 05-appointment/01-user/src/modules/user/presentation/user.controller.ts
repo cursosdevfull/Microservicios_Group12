@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { inject, injectable } from "inversify";
 
 import { IError } from "../../core/interface/error.interface";
 import { CypherService } from "../../core/presentation/service/cypher.service";
@@ -7,9 +8,11 @@ import { UserProperties } from "../domain/roots/user";
 import { UserFactory } from "../domain/roots/user.factory";
 import { ValidationsUserService } from "./services/validations.service";
 
-//@injectable()
+@injectable()
 export class UserController {
-  constructor(private readonly application: UserApplication) {}
+  constructor(
+    @inject("UserApplication") private readonly application: UserApplication
+  ) {}
 
   async create(req: Request, res: Response, next: NextFunction) {
     const errors = await ValidationsUserService.create(req.body);
@@ -66,6 +69,7 @@ export class UserController {
       objError.status = 411;
       objError.message = "Invalid parameters";
       objError.stack = JSON.stringify(errors);
+      console.log(objError);
       return next(objError);
     }
 

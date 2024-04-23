@@ -1,0 +1,22 @@
+###
+post http://localhost:6000/api/login
+Content-Type: application/json
+
+{
+  "email": "sergio@correo.com",
+  "password": "12345"
+}
+
+###
+post http://localhost:6000/api/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhNWIyYjQ2Zi0zNzZhLTQyYmUtOThmZi1hYzkyMDlmY2RhZGIiLCJuYW1lIjoiU2VyZ2lvIiwibGFzdG5hbWUiOiJIaWRhbGdvIiwiZW1haWwiOiJzZXJnaW9AY29ycmVvLmNvbSIsInJvbGVzIjpbeyJuYW1lIjoiQURNSU4ifSx7Im5hbWUiOiJPUEVSQVRPUiJ9XSwiaWF0IjoxNzEzNjUzNDI2LCJleHAiOjE3MTM2NjA2MjZ9.9U56FeKzfx7ezhJv4MhFyaNOnJHUgP3ilXrp8_U24ek
+
+{
+  "name": "Sergio",
+  "lastname": "Hidalgo",
+  "email":"sergio5@correo.com",
+  "password":"12345",
+  "roles": [{"roleId": "420315c8-9065-4fa2-be9d-c7093dc525c5"}, {"roleId": "530536bd-f325-40ee-8ca9-78d7d5ee149e"}]
+}
+

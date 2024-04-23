@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@auth": ["src/modules/auth/index.ts"],
+      "@bootstrap": ["src/bootstrap/index.ts"],
+      "@core": ["src/modules/core/index.ts"],
+      "@user/domain": ["src/modules/user/domain/index.ts"],
+      "@user/infrastructure": ["src/modules/user/infrastructure/index.ts"],
+      "@user/application": ["src/modules/user/application/index.ts"],
+      "@user/presentation": ["src/modules/user/presentation/index.ts"],
+      "@container": ["src/modules/core/container/index.ts"]
+    },
+    "target": "es2016",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "rootDir": "./",
+    "outDir": "./cache",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "cache"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}

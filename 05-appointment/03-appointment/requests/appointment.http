@@ -1,0 +1,13 @@
+post http://localhost:7000/appointment
+Content-Type: application/json
+
+{
+  "appointmentId": "41a07273-ce0b-4969-a43b-88c0231f90f9",
+  "patientId": "a08b996f-8247-4bb9-94a9-55ba0daf8b15",
+  "centerId": "64540b0c-3ae3-4b88-8491-5d064563e098",
+  "specialtyId": "8f6a08d8-fb69-400b-aa55-ef89f484dd51",
+  "appointmentDate": "2024-05-03",
+  "appointmentTime": "10:00",
+  "appointmentStatus": "pending",
+  "country": "CO"
+}

@@ -1,9 +1,9 @@
 import { Parameters } from "@core";
-import { userRouter } from "@user/presentation";
 import express, { Application } from "express";
 
 import { ErrorsInterceptor } from "./modules/core/middlewares/errors.interceptor";
 import { ResponseInterceptor } from "./modules/core/middlewares/response.interceptor";
+import { userRouter } from "./modules/user/presentation/user.routes";
 import { swaggerDocs } from "./swagger";
 
 class App {

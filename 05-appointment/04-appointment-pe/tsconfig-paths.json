@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@auth": ["src/modules/auth/index.ts"],
+      "@bootstrap": ["src/bootstrap/index.ts"],
+      "@core": ["src/modules/core/index.ts"],
+      "@user/domain": ["src/modules/user/domain/index.ts"],
+      "@user/infrastructure": ["src/modules/user/infrastructure/index.ts"],
+      "@user/application": ["src/modules/user/application/index.ts"],
+      "@user/presentation": ["src/modules/user/presentation/index.ts"]
+    }
+  }
+}

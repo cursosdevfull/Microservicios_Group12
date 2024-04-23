@@ -3,8 +3,8 @@ Content-Type: application/json
 
 {
   "name": "Sergio",
-  "lastname": "Hidalog",
-  "email": "sergio@email.com",
+  "lastname": "Hidalgo",
+  "email": "sergio2@correo.com",
   "password": "12345",
   "roles": [{"roleId": "420315c8-9065-4fa2-be9d-c7093dc525c5"}, {"roleId": "530536bd-f325-40ee-8ca9-78d7d5ee149e"}]
 }
@@ -17,6 +17,6 @@ post http://localhost:4000/user/login
 Content-Type: application/json
 
 {
-  "email": "sergio@email.com",
+  "email": "sergio@correo.com",
   "password": "12345"
 }
