@@ -22,7 +22,7 @@ RUN apk add curl
 COPY --from=stage_deps /app/node_modules ./node_modules
 COPY --from=stage_build /app/dist ./dist
 COPY --from=stage_build /app/package.json ./package.json
-COPY env.txt .
+# COPY env.txt .
 COPY tsconfig-paths-bootstrap.js .
 COPY tsconfig.json .
 USER node

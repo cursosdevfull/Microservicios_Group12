@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { KafkaRepository } from "src/modules/kafka/domain/repositories/kafka.repository";
-import { KafkaInfrastructure } from "src/modules/kafka/infrastructure/kafka.infrastructure";
 
+import { KafkaRepository } from "../../kafka/domain/repositories/kafka.repository";
+import { KafkaInfrastructure } from "../../kafka/infrastructure/kafka.infrastructure";
 import { AppointmentApplication } from "../application/appointment.application";
 import { AppointmentInfrastructure } from "../infrastructure/appointment.infrastructure";
 import { AppointmentController } from "./appointment.controller";

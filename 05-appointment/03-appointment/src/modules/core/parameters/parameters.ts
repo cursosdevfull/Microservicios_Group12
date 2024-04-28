@@ -42,6 +42,10 @@ export class Parameters {
   }
 
   static get kafkaConfig() {
+    console.log("kafka config", {
+      clientId: process.env.KAFKA_CLIENT_ID || "my-client-kafka",
+      brokers: process.env.KAFKA_BROKERS.split(",") || ["localhost:9092"],
+    });
     return {
       clientId: process.env.KAFKA_CLIENT_ID || "my-client-kafka",
       brokers: process.env.KAFKA_BROKERS.split(",") || ["localhost:9092"],
@@ -52,7 +56,23 @@ export class Parameters {
     return process.env.KAFKA_GROUP_ID || "test-group";
   }
 
-  static get kafkaTopic() {
-    return process.env.KAFKA_TOPIC || "test-topic";
+  static get kafkaTopicPE() {
+    return process.env.KAFKA_TOPIC_PE || "test-topic-pe";
+  }
+
+  static get kafkaTopicCO() {
+    return process.env.KAFKA_TOPIC_CO || "test-topic-co";
+  }
+
+  static get kafkaTopicMX() {
+    return process.env.KAFKA_TOPIC_MX || "test-topic-mx";
+  }
+
+  static get kafkaTopicAppointment() {
+    return process.env.KAFKA_TOPIC_APPOINTMENT || "test-topic-appointment";
+  }
+
+  static get kafkaTopicRollout() {
+    return process.env.KAFKA_TOPIC_ROLLOUT || "test-topic-rollout";
   }
 }

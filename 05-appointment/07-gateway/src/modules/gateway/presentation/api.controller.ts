@@ -41,4 +41,20 @@ export class ApiController {
 
     res.status(200).json(result.value.data);
   }
+
+  async createAppointment(req: Request, res: Response, next: NextFunction) {
+    const data = req.body;
+
+    const result = await this.application.endpoint(
+      Parameters.serviceAppointmentCreate,
+      "POST",
+      data
+    );
+
+    if (result.isErr()) {
+      return next(result.error);
+    }
+
+    res.status(200).json(result.value.data);
+  }
 }

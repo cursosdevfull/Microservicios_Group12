@@ -102,28 +102,172 @@ services:
     networks:
       - net-ms
 
-  # app:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   image: app
-  #   container_name: app
-  #   restart: unless-stopped
-  #   ports:
-  #     - "4000:4000"
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:4000"]
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 3
-  #     start_interval: 2s
-  #   depends_on:
-  #     mysql-server:
-  #       condition: service_healthy
-  #     kafka:
-  #       condition: service_healthy
-  #   networks:
-  #     - net-ms
+  appointment:
+    build:
+      context: ./03-appointment
+      dockerfile: Dockerfile
+    image: appointment
+    container_name: appointment
+    restart: unless-stopped
+    env_file:
+      - environments/appointment.env
+      - environments/database.env
+      - environments/kafka.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7000"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  appointment-pe:
+    build:
+      context: ./04-appointment-pe
+      dockerfile: Dockerfile
+    image: appointment-pe
+    container_name: appointment-pe
+    restart: unless-stopped
+    env_file:
+      - environments/appointment-pe.env
+      - environments/database.env
+      - environments/kafka.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  appointment-co:
+    build:
+      context: ./05-appointment-co
+      dockerfile: Dockerfile
+    image: appointment-co
+    container_name: appointment-co
+    restart: unless-stopped
+    env_file:
+      - environments/appointment-co.env
+      - environments/database.env
+      - environments/kafka.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  appointment-mx:
+    build:
+      context: ./06-appointment-mx
+      dockerfile: Dockerfile
+    image: appointment-mx
+    container_name: appointment-mx
+    restart: unless-stopped
+    env_file:
+      - environments/appointment-mx.env
+      - environments/database.env
+      - environments/kafka.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8200"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  user:
+    build:
+      context: ./01-user
+      dockerfile: Dockerfile
+    image: user
+    container_name: user
+    restart: unless-stopped
+    env_file:
+      - environments/user.env
+      - environments/database.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  auth:
+    build:
+      context: ./02-auth
+      dockerfile: Dockerfile
+    image: auth
+    container_name: auth
+    restart: unless-stopped
+    env_file:
+      - environments/auth.env
+      - environments/database.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  gateway:
+    build:
+      context: ./07-gateway
+      dockerfile: Dockerfile
+    image: gateway
+    container_name: gateway
+    restart: unless-stopped
+    ports:
+      - "6000:6000"
+    env_file:
+      - environments/gateway.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6000"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
 
 volumes:
   vol-mysql-server:

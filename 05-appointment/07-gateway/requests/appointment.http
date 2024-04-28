@@ -1,0 +1,46 @@
+post http://localhost:6000/api/appointment
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhNWIyYjQ2Zi0zNzZhLTQyYmUtOThmZi1hYzkyMDlmY2RhZGIiLCJuYW1lIjoiU2VyZ2lvIiwibGFzdG5hbWUiOiJIaWRhbGdvIiwiZW1haWwiOiJzZXJnaW9AY29ycmVvLmNvbSIsInJvbGVzIjpbeyJuYW1lIjoiQURNSU4ifSx7Im5hbWUiOiJPUEVSQVRPUiJ9XSwiaWF0IjoxNzE0MjY1Mzk1LCJleHAiOjE3MTQyNzI1OTV9.ZFMtuhcLKuTblkRlfzBX-6-7W-LivKAqQOqGR2lpSQg
+Content-Type: application/json
+
+{
+  "appointmentId": "41a07273-ce0b-4969-a43b-88c0231f90f9",
+  "patientId": "a08b996f-8247-4bb9-94a9-55ba0daf8b15",
+  "centerId": "64540b0c-3ae3-4b88-8491-5d064563e098",
+  "specialtyId": "8f6a08d8-fb69-400b-aa55-ef89f484dd51",
+  "appointmentDate": "2024-05-05",
+  "appointmentTime": "10:00",
+  "appointmentStatus": "pending",
+  "country": "MX"
+}
+
+###
+post http://localhost:6000/api/appointment
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhNWIyYjQ2Zi0zNzZhLTQyYmUtOThmZi1hYzkyMDlmY2RhZGIiLCJuYW1lIjoiU2VyZ2lvIiwibGFzdG5hbWUiOiJIaWRhbGdvIiwiZW1haWwiOiJzZXJnaW9AY29ycmVvLmNvbSIsInJvbGVzIjpbeyJuYW1lIjoiQURNSU4ifSx7Im5hbWUiOiJPUEVSQVRPUiJ9XSwiaWF0IjoxNzE0MjY1Mzk1LCJleHAiOjE3MTQyNzI1OTV9.ZFMtuhcLKuTblkRlfzBX-6-7W-LivKAqQOqGR2lpSQg
+Content-Type: application/json
+
+{
+  "appointmentId": "a8370f12-6101-4f4c-9302-83173a0fc6d2",
+  "patientId": "a08b996f-8247-4bb9-94a9-55ba0daf8b15",
+  "centerId": "64540b0c-3ae3-4b88-8491-5d064563e098",
+  "specialtyId": "8f6a08d8-fb69-400b-aa55-ef89f484dd51",
+  "appointmentDate": "2024-05-05",
+  "appointmentTime": "10:00",
+  "appointmentStatus": "pending",
+  "country": "PE"
+}
+
+###
+post http://localhost:6000/api/appointment
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhNWIyYjQ2Zi0zNzZhLTQyYmUtOThmZi1hYzkyMDlmY2RhZGIiLCJuYW1lIjoiU2VyZ2lvIiwibGFzdG5hbWUiOiJIaWRhbGdvIiwiZW1haWwiOiJzZXJnaW9AY29ycmVvLmNvbSIsInJvbGVzIjpbeyJuYW1lIjoiQURNSU4ifSx7Im5hbWUiOiJPUEVSQVRPUiJ9XSwiaWF0IjoxNzE0MjY1Mzk1LCJleHAiOjE3MTQyNzI1OTV9.ZFMtuhcLKuTblkRlfzBX-6-7W-LivKAqQOqGR2lpSQg
+Content-Type: application/json
+
+{
+  "appointmentId": "1330a478-74e2-409c-86e8-92e2bdd2ed64",
+  "patientId": "a08b996f-8247-4bb9-94a9-55ba0daf8b15",
+  "centerId": "64540b0c-3ae3-4b88-8491-5d064563e098",
+  "specialtyId": "8f6a08d8-fb69-400b-aa55-ef89f484dd51",
+  "appointmentDate": "2024-05-05",
+  "appointmentTime": "10:00",
+  "appointmentStatus": "pending",
+  "country": "CO"
+}

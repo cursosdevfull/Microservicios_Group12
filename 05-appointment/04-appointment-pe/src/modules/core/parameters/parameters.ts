@@ -53,4 +53,12 @@ export class Parameters {
   static get kafkaTopic() {
     return process.env.KAFKA_TOPIC || "test-topic";
   }
+
+  static get kafkaTopicAppointment() {
+    return process.env.KAFKA_TOPIC_APPOINTMENT || "test-topic-appointment";
+  }
+
+  static get kafkaTopicRollout() {
+    return process.env.KAFKA_TOPIC_ROLLOUT || "test-topic-rollout";
+  }
 }

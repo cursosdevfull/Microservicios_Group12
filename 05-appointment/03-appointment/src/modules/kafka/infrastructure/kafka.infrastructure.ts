@@ -27,6 +27,16 @@ export class KafkaInfrastructure implements KafkaRepository {
     partition: number = 0
   ) {
     const producer = BrokerBootstrap.getProducer();
+    console.log("Body", {
+      topic,
+      messages: [
+        {
+          partition,
+          key,
+          value: JSON.stringify(message),
+        },
+      ],
+    });
     await producer.send({
       topic,
       messages: [

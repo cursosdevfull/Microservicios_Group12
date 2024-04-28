@@ -18,16 +18,16 @@ export type AppointmentProperties = AppointmentEssentials &
   Partial<AppointmentOptionals>;
 
 export class Appointment {
-  appointmentId: string;
-  patientId: string;
-  centerId: string;
-  specialtyId: string;
-  appointmentDate: string;
-  appointmentTime: string;
-  appointmentStatus: string;
-  country: string;
-  createdAt: Date;
-  updatedAt: Date | undefined;
+  private readonly appointmentId: string;
+  private patientId: string;
+  private centerId: string;
+  private specialtyId: string;
+  private appointmentDate: string;
+  private appointmentTime: string;
+  private appointmentStatus: string;
+  private country: string;
+  private createdAt: Date;
+  private updatedAt: Date | undefined;
 
   constructor(appointment: AppointmentProperties) {
     this.appointmentId = appointment.appointmentId;

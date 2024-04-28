@@ -1,23 +1,34 @@
 import "reflect-metadata";
 
-import { DatabaseBootstrap, ServerBootstrap } from "@bootstrap";
+import {
+  BrokerBootstrap,
+  DatabaseBootstrap,
+  ServerBootstrap,
+} from "@bootstrap";
 import dotenv from "dotenv";
 
 import { app } from "./app";
+import { container } from "./modules/core/container/container";
+import { KafkaApplication } from "./modules/kafka/application/kakfa.application";
 
 dotenv.config({ path: "env.txt" });
 
 const serverBootstrap = new ServerBootstrap(app);
 const databaseBootstrap = new DatabaseBootstrap();
+const brokeBootstrap = new BrokerBootstrap();
 
 (async () => {
   try {
     const taskAsyncronous = [
       serverBootstrap.initialize(),
       databaseBootstrap.initialize(),
+      brokeBootstrap.initialize(),
     ];
 
     await Promise.all(taskAsyncronous);
+
+    const application = container.get<KafkaApplication>("KafkaApplication");
+    application.run();
   } catch (error) {
     console.error(error);
     process.exit(1);

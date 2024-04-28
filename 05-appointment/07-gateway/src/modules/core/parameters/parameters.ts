@@ -35,4 +35,8 @@ export class Parameters {
   static get serviceUserCreate(): string {
     return process.env.SERVICE_USER_CREATE;
   }
+
+  static get serviceAppointmentCreate(): string {
+    return process.env.SERVICE_APPOINTMENT_CREATE;
+  }
 }

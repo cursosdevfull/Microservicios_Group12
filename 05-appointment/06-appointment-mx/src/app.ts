@@ -1,5 +1,4 @@
 import { Parameters } from "@core";
-import { userRouter } from "@user/presentation";
 import express, { Application } from "express";
 
 import { ErrorsInterceptor } from "./modules/core/middlewares/errors.interceptor";
@@ -18,7 +17,6 @@ class App {
     this.mountMiddlewares();
     this.mountSwagger();
     this.mountHealthCheck();
-    this.mountRoutes();
     this.mountErrorHandlers();
   }
 
@@ -36,10 +34,6 @@ class App {
     this.app.get("/", (_, res) => {
       res.json({ status: "ok" });
     });
-  }
-
-  private mountRoutes() {
-    this.app.use("/user", userRouter);
   }
 
   private mountErrorHandlers() {

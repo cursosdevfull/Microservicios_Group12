@@ -8,6 +8,8 @@ import {
 import dotenv from "dotenv";
 
 import { app } from "./app";
+import { AppointmentApplication } from "./modules/appointment/application/appointment.application";
+import { container } from "./modules/core/container/container";
 
 dotenv.config({ path: "env.txt" });
 
@@ -24,6 +26,11 @@ const brokerBootstrap = new BrokerBootstrap();
     ];
 
     await Promise.all(taskAsyncronous);
+
+    const application = container.get<AppointmentApplication>(
+      "AppointmentApplication"
+    );
+    application.listenMessage();
   } catch (error) {
     console.error(error);
     process.exit(1);

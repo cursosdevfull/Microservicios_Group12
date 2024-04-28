@@ -16,9 +16,33 @@ export class KafkaApplication {
       console.log("Message received: ", message.value.toString());
       console.log("Partition: ", partition.toString());
 
+      const appointment = JSON.parse(message.value.toString());
+
       const consumer = BrokerBootstrap.getConsumer();
 
-      if (partition === 0) {
+      await consumer.commitOffsets([
+        { topic, partition, offset: message.offset + 1 },
+      ]);
+
+      const isThereError = true;
+
+      if (!isThereError) {
+        await this.repository.sentMessage(
+          Parameters.kafkaTopicAppointment,
+          "appointment",
+          { appointmentId: appointment.appointmentId, status: "COMPLETED" },
+          0
+        );
+      } else {
+        await this.repository.sentMessage(
+          Parameters.kafkaTopicRollout,
+          "appointment",
+          { appointmentId: appointment.appointmentId, status: "CANCELLED" },
+          0
+        );
+      }
+
+      /* if (partition === 0) {
         console.log("Commiting offset", message.offset);
         await consumer.commitOffsets([
           { topic, partition, offset: message.offset + 1 },
@@ -28,7 +52,7 @@ export class KafkaApplication {
           { topic, partition, offset: (Number(message.offset) - 1).toString() },
         ]);
         //consumer.seek({ topic, partition, offset: message.offset });
-      }
+      } */
     });
   }
 }

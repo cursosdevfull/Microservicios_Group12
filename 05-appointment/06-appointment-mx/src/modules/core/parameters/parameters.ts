@@ -1,6 +1,3 @@
-import { RoleEntity } from "../../user/infrastructure/entities/role.entity";
-import { UserEntity } from "../../user/infrastructure/entities/user.entity";
-
 export interface IDatabaseConfig {
   host: string;
   port: number;
@@ -27,7 +24,7 @@ export class Parameters {
     return {
       host: process.env.DB_HOST || "localhost",
       port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 3306,
-      entities: [UserEntity, RoleEntity],
+      entities: [],
       username: process.env.DB_USERNAME || "root",
       password: process.env.DB_PASSWORD || "root",
       database: process.env.DB_NAME || "test",
@@ -55,5 +52,13 @@ export class Parameters {
 
   static get kafkaTopic() {
     return process.env.KAFKA_TOPIC || "test-topic";
+  }
+
+  static get kafkaTopicAppointment() {
+    return process.env.KAFKA_TOPIC_APPOINTMENT || "test-topic-appointment";
+  }
+
+  static get kafkaTopicRollout() {
+    return process.env.KAFKA_TOPIC_ROLLOUT || "test-topic-rollout";
   }
 }

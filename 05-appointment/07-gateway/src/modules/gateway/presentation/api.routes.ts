@@ -18,8 +18,13 @@ class ApiRoutes {
     this.router.post("/login", this.controller.login.bind(this.controller));
     this.router.post(
       "/register",
-      Authentication.canActivate,
+      // Authentication.canActivate,
       this.controller.register.bind(this.controller)
+    );
+    this.router.post(
+      "/appointment",
+      Authentication.canActivate,
+      this.controller.createAppointment.bind(this.controller)
     );
   }
 }

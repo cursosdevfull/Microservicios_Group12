@@ -1,6 +1,6 @@
 import { Container } from "inversify";
-import { KafkaApplication } from "src/modules/kafka/application/kakfa.application";
 
+import { KafkaApplication } from "../../kafka/application/kakfa.application";
 import { KafkaRepository } from "../../kafka/domain/repositories/kafka.repository";
 import { KafkaInfrastructure } from "../../kafka/infrastructure/kafka.infrastructure";
 

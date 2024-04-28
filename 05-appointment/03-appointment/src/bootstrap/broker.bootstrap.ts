@@ -18,8 +18,24 @@ export class BrokerBootstrap {
     await admin.createTopics({
       topics: [
         {
-          topic: Parameters.kafkaTopic,
-          numPartitions: 3,
+          topic: Parameters.kafkaTopicPE,
+          numPartitions: 1,
+        },
+        {
+          topic: Parameters.kafkaTopicCO,
+          numPartitions: 1,
+        },
+        {
+          topic: Parameters.kafkaTopicMX,
+          numPartitions: 1,
+        },
+        {
+          topic: Parameters.kafkaTopicAppointment,
+          numPartitions: 1,
+        },
+        {
+          topic: Parameters.kafkaTopicRollout,
+          numPartitions: 1,
         },
       ],
     });

@@ -1,13 +1,12 @@
-import { UserApplication } from "@user/application";
-import { UserRepository } from "@user/domain";
-import { UserInfrastructure } from "@user/infrastructure";
-import { UserController } from "@user/presentation";
 import { Container } from "inversify";
 
+import { KafkaApplication } from "../../kafka/application/kakfa.application";
+import { KafkaRepository } from "../../kafka/domain/repositories/kafka.repository";
+import { KafkaInfrastructure } from "../../kafka/infrastructure/kafka.infrastructure";
+
 const container = new Container();
-container.bind<UserRepository>("UserRepository").to(UserInfrastructure);
-container.bind<UserApplication>("UserApplication").to(UserApplication);
-container.bind<UserController>("UserController").to(UserController);
+container.bind<KafkaApplication>("KafkaApplication").to(KafkaApplication);
+container.bind<KafkaRepository>("KafkaRepository").to(KafkaInfrastructure);
 
 //console.log("container initialize", container);
 
