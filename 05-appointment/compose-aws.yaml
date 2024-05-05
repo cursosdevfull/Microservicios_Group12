@@ -1,0 +1,279 @@
+version: "3.8"
+
+services:
+  mysql-server:
+    image: mysql:8
+    container_name: mysql-server
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    volumes:
+      - vol-mysql-server:/var/lib/mysql
+    networks:
+      - net-ms
+
+  mysql-client:
+    image: phpmyadmin
+    container_name: mysql-client
+    ports:
+      - "8080:80"
+    environment:
+      PMA_ARBITRARY: 1
+    restart: unless-stopped
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "localhost"]
+      interval: 50s
+      timeout: 5s
+      retries: 3
+    networks:
+      - net-ms
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.5.3
+    container_name: zookeeper
+    hostname: zookeeper
+    restart: unless-stopped
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    healthcheck:
+      test: nc -z localhost 2181 || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 5s
+    networks:
+      - net-ms
+
+  kafka:
+    image: confluentinc/cp-kafka
+    container_name: kafka
+    restart: unless-stopped
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    healthcheck:
+      test: kafka-topics --bootstrap-server kafka:9092 --list
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_interval: 10s
+    ports:
+      - 9092:9092
+    networks:
+      - net-ms
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - 8081:8080
+    environment:
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+    networks:
+      - net-ms
+
+  appointment:
+    build:
+      context: ./03-appointment
+      dockerfile: Dockerfile
+    image: 282865065290.dkr.ecr.us-east-1.amazonaws.com/appointment
+    container_name: appointment
+    restart: unless-stopped
+    env_file:
+      - environments/appointment.env
+      - environments/database.env
+      - environments/kafka.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7000"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  appointment-pe:
+    build:
+      context: ./04-appointment-pe
+      dockerfile: Dockerfile
+    image: 282865065290.dkr.ecr.us-east-1.amazonaws.com/appointment-pe
+    container_name: appointment-pe
+    restart: unless-stopped
+    env_file:
+      - environments/appointment-pe.env
+      - environments/database.env
+      - environments/kafka.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  appointment-co:
+    build:
+      context: ./05-appointment-co
+      dockerfile: Dockerfile
+    image: 282865065290.dkr.ecr.us-east-1.amazonaws.com/appointment-co
+    container_name: appointment-co
+    restart: unless-stopped
+    env_file:
+      - environments/appointment-co.env
+      - environments/database.env
+      - environments/kafka.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  appointment-mx:
+    build:
+      context: ./06-appointment-mx
+      dockerfile: Dockerfile
+    image: 282865065290.dkr.ecr.us-east-1.amazonaws.com/appointment-mx
+    container_name: appointment-mx
+    restart: unless-stopped
+    env_file:
+      - environments/appointment-mx.env
+      - environments/database.env
+      - environments/kafka.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8200"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  user:
+    build:
+      context: ./01-user
+      dockerfile: Dockerfile
+    image: 282865065290.dkr.ecr.us-east-1.amazonaws.com/user
+    container_name: user
+    restart: unless-stopped
+    env_file:
+      - environments/user.env
+      - environments/database.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  auth:
+    build:
+      context: ./02-auth
+      dockerfile: Dockerfile
+    image: 282865065290.dkr.ecr.us-east-1.amazonaws.com/auth
+    container_name: auth
+    restart: unless-stopped
+    env_file:
+      - environments/auth.env
+      - environments/database.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+  gateway:
+    build:
+      context: ./07-gateway
+      dockerfile: Dockerfile
+    image: 282865065290.dkr.ecr.us-east-1.amazonaws.com/gateway
+    container_name: gateway
+    restart: unless-stopped
+    ports:
+      - "6000:6000"
+    env_file:
+      - environments/gateway.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6000"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_interval: 2s
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - net-ms
+
+volumes:
+  vol-mysql-server:
+    name: vol-mysql-server
+
+networks:
+  net-ms:
+    driver: bridge
+    name: net-ms
