@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: database
+data:
+  DB_HOST: database-ms.cmuv7any6zxa.us-east-1.rds.amazonaws.com
+  DB_PORT: "3306"
+  DB_USERNAME: admin
+  DB_PASSWORD: elGigan5t32024?
+  DB_NAME: test
+  DB_SYNCHRONIZE: "true"
+  DB_LOGGING: "false"
+  DB_POOL_SIZE: "10"
+  DB_MAX_QUERY_EXECUTION_TIME: "10000"

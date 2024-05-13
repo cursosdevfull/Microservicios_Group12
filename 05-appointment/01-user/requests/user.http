@@ -1,4 +1,4 @@
-post http://localhost:4000/user
+post https://k8s-default-ingressa-d2bfbbe274-1094271374.us-east-1.elb.amazonaws.com/user
 Content-Type: application/json
 
 {

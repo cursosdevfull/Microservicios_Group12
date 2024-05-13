@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway
+data:
+  PORT: "6000"
+  APP_HOSTNAME: localhost
+  SERVICE_USER_LOGIN: http://auth-svc/auth/login
+  SERVICE_USER_CREATE: http://user-svc/user
+  SERVICE_APPOINTMENT_CREATE: http://appointment-svc/appointment

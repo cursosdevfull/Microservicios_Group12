@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appointment-pe-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appointment-pe-app
+  template:
+    metadata:
+      labels:
+        app: appointment-pe-app
+    spec:
+      containers:
+        - name: appointment-pe
+          image: 282865065290.dkr.ecr.us-east-1.amazonaws.com/appointment-pe
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: appointment-pe
+            - configMapRef:
+                name: database
+            - configMapRef:
+                name: kafka

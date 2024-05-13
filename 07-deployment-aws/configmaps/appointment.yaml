@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: appointment
+data:
+  PORT: "7000"
+  APP_HOSTNAME: localhost
+  KAFKA_GROUP_ID: my-group-kafka
+  KAFKA_TOPIC_PE: appointment-pe
+  KAFKA_TOPIC_CO: appointment-co
+  KAFKA_TOPIC_MX: appointment-mx

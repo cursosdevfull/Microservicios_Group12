@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-app
+  template:
+    metadata:
+      labels:
+        app: gateway-app
+    spec:
+      containers:
+        - name: gateway
+          image: 282865065290.dkr.ecr.us-east-1.amazonaws.com/gateway
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6000
+          envFrom:
+            - configMapRef:
+                name: gateway

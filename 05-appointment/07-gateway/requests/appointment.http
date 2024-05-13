@@ -1,5 +1,5 @@
-post http://localhost:6000/api/appointment
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhNWIyYjQ2Zi0zNzZhLTQyYmUtOThmZi1hYzkyMDlmY2RhZGIiLCJuYW1lIjoiU2VyZ2lvIiwibGFzdG5hbWUiOiJIaWRhbGdvIiwiZW1haWwiOiJzZXJnaW9AY29ycmVvLmNvbSIsInJvbGVzIjpbeyJuYW1lIjoiQURNSU4ifSx7Im5hbWUiOiJPUEVSQVRPUiJ9XSwiaWF0IjoxNzE0MjY1Mzk1LCJleHAiOjE3MTQyNzI1OTV9.ZFMtuhcLKuTblkRlfzBX-6-7W-LivKAqQOqGR2lpSQg
+post http://k8s-default-ingressa-d2bfbbe274-1094271374.us-east-1.elb.amazonaws.com/api/appointment
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3YWU4ZjRmZC02NThhLTRkYjQtYTMzOS0wNzA4NWU2MWJjODYiLCJuYW1lIjoiU2VyZ2lvIiwibGFzdG5hbWUiOiJIaWRhbGdvIiwiZW1haWwiOiJzZXJnaW9AY29ycmVvLmNvbSIsInJvbGVzIjpbeyJuYW1lIjoiT1BFUkFUT1IifSx7Im5hbWUiOiJBRE1JTiJ9XSwiaWF0IjoxNzE1NDY1ODExLCJleHAiOjE3MTU0NzMwMTF9.suWnTgxYWXU0Ikp2yizlWMrs8NgfPr5D5FgoRNXK26U
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
   "patientId": "a08b996f-8247-4bb9-94a9-55ba0daf8b15",
   "centerId": "64540b0c-3ae3-4b88-8491-5d064563e098",
   "specialtyId": "8f6a08d8-fb69-400b-aa55-ef89f484dd51",
-  "appointmentDate": "2024-05-05",
+  "appointmentDate": "2024-05-12",
   "appointmentTime": "10:00",
   "appointmentStatus": "pending",
   "country": "MX"

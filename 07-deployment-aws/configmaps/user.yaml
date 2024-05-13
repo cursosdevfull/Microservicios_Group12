@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user
+data:
+  PORT: "4000"
+  APP_HOSTNAME: localhost
+  KAFKA_CLIENT_ID: my-client-kafka
+  KAFKA_BROKERS: kafka-svc:9092
+  KAFKA_GROUP_ID: my-group-kafka
